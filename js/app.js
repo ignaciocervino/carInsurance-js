@@ -30,4 +30,26 @@ const ui = new UI();
 document.addEventListener('DOMContentLoaded',()=>{
     ui.llenarOpciones();
 });
+eventListeners();
+function eventListeners(){
+    const formulario = document.querySelector('#cotizar-seguro');
+    formulario.addEventListener('submit',contizarSeguro);
+}
+
+function contizarSeguro(e){
+    e.preventDefault();
+    //Leer la marca seleccionada
+    const marca = document.querySelector('#marca').value;
+    //Leer el año seleccionado
+    const year = document.querySelector('#year').value;
+    //Leer el tipo de cobertura
+    const tipo = document.querySelector('input[name="tipo"]:checked').value;//Son radio buttons
+
+    if(marca === '' || year === '' || tipo=== ''){
+        console.log("No paso la validacion");
+    }
+    else{
+        console.log("Si paso la validacion");
+    }
+}
 
