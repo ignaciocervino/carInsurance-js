@@ -23,6 +23,26 @@ UI.prototype.llenarOpciones=()=>{//Puedo usar arraow function porq no voy a usar
     }
 }
 
+//Muestra alertas en pantalla
+UI.prototype.mostrarMensaje = (mensaje,tipo)=>{
+    const div = document.createElement('div');
+    if(tipo === 'error'){
+        div.classList.add('error');
+    }
+    else{
+        div.classList.add('correcto');
+    }
+
+    div.classList.add('mensaje','mt.10');
+    div.textContent = mensaje;
+    //Insertar en HTML
+    const formulario = document.querySelector('#cotizar-seguro');
+    formulario.insertBefore(div,document.querySelector('#resultado'));
+    setTimeout(()=>{
+        div.remove();
+    },3000);
+}
+
 //Instancia UI
 const ui = new UI();
 
@@ -46,10 +66,10 @@ function contizarSeguro(e){
     const tipo = document.querySelector('input[name="tipo"]:checked').value;//Son radio buttons
 
     if(marca === '' || year === '' || tipo=== ''){
-        console.log("No paso la validacion");
+        ui.mostrarMensaje('Todos los campos son obligatorios','error');
+        return;
     }
-    else{
-        console.log("Si paso la validacion");
-    }
+    
+    ui.mostrarMensaje('Corizando','exito');
 }
 
